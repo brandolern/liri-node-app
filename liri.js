@@ -11,7 +11,6 @@ var searchSpotify = "spotify-this-song";
 var movie = "movie-this";
 var doWhatItSays = "do-what-it-says";
 
-
 var nodeArgs = process.argv;
 var userSearch = "";
 
@@ -30,6 +29,8 @@ function search() {
 var input = process.argv[2];
 
 switch (input) {
+
+    //Bands in town api
     case concert:
         search();
         var concertQuery = `https://rest.bandsintown.com/artists/${userSearch}/events?app_id=codingbootcamp`;
@@ -47,9 +48,11 @@ switch (input) {
 
         break
 
+        //Spotify Api
     case searchSpotify:
         break
 
+        //OMDB Api
     case movie:
 
         if (process.argv.length < 4) {
@@ -59,7 +62,7 @@ switch (input) {
                 console.log("Title: " + response.data.Title);
                 console.log("Release Year: " + response.data.Released);
                 console.log("IMDB Rating: " + response.data.imdbRating);
-                // console.log("Rotten Tomatoes: " + response.data.Ratings[1].Value);
+                console.log("Rotten Tomatoes: " + response.data.Ratings[1].Value);
                 console.log("Country: " + response.data.Country);
                 console.log("Language: " + response.data.Language);
                 console.log("Plot: " + response.data.Plot);
@@ -85,9 +88,8 @@ switch (input) {
             console.log("Plot: " + response.data.Plot);
             console.log("Actors: " + response.data.Actors);
             console.log("```");
-        }).catch(function () {
+        }).catch(function (error) {
             if (error.response) {
-
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
