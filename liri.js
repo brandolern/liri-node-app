@@ -38,7 +38,7 @@ var liri = {
         axios.get(concertQuery).then(
             function (response) {
                 for (i = 0; i < response.data.length; i++) {
-                    console.log("```")
+                    console.log("````````````````````");
                     console.log(response.data[i].venue.name);
                     console.log(response.data[i].venue.city + ", " + response.data[i].venue.country);
                     console.log(moment(response.data[i].datetime).format('MMM Do YYYY'));
@@ -50,7 +50,7 @@ var liri = {
 
     spotifySearch: function () {
 
-        if (this.nodeArgs.length < 4) this.userSearch = "The+Sign";
+        if (this.nodeArgs.length < 4) this.userSearch = "ace+of+base+the+sign";
 
         spotify.search({
                 type: 'track',
@@ -63,7 +63,7 @@ var liri = {
 
                 for (i = 0; i < data.tracks.items.length; i++) {
 
-                    console.log("```")
+                    console.log("````````````````````");
                     console.log("Artist: " + data.tracks.items[i].album.artists[0].name);
                     console.log("Song Name: " + data.tracks.items[i].name);
 
@@ -88,12 +88,12 @@ var liri = {
         var omdbQuery = `http://www.omdbapi.com/?t=${this.userSearch}&y=&plot=short&apikey=b4d60128`;
         axios.get(omdbQuery).then(function (response) {
 
-            console.log("```");
+            console.log("````````````````````");
             console.log("Title: " + response.data.Title);
             console.log("Release Year: " + response.data.Released);
             console.log("IMDB Rating: " + response.data.imdbRating);
 
-            //If statement that removes rotten tomatoes rating if there isn't one (ex: tv shows).
+            //If statement that removes rotten tomatoes rating if there isn't one (ex: tv shows). 
             if (response.data.Ratings.length > 1) {
                 console.log("Rotten Tomatoes: " + response.data.Ratings[1].Value);
             }
@@ -101,7 +101,6 @@ var liri = {
             console.log("Language: " + response.data.Language);
             console.log("Plot: " + response.data.Plot);
             console.log("Actors: " + response.data.Actors);
-            console.log("```");
 
         }).catch(function (error) {
             if (error.response) {
@@ -128,9 +127,11 @@ var liri = {
                 return console.log(err);
             };
 
+            //Splits the data from random.txt
             var dataArr = data.split(",");
             var newCommand = dataArr[0];
             var newSearch = dataArr[1].split(" ");
+            //Removes the do-what-it-says from nodeArgs and adds in the command from random.txt
             liri.nodeArgs.splice(2, 1, newCommand);
 
             for (i = 0; i < newSearch.length; i++) {
@@ -149,7 +150,6 @@ var liri = {
                 console.log("spotify-this-song");
                 console.log("movie-this");
                 console.log("do-what-it-says");
-
             }
         });
     }
@@ -175,7 +175,7 @@ switch (liri.input) {
         liri.movieSearch();
         break
 
-        //Pulls the info from random.txt
+        //Pulls the info from random.txt 
     case liri.commands.doWhatItSays:
         liri.grabText();
         break
