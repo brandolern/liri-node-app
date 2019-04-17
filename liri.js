@@ -133,7 +133,7 @@ var liri = {
             var newSearch = dataArr[1].split(" ");
             //Removes the do-what-it-says from nodeArgs and adds in the command from random.txt
             liri.nodeArgs.splice(2, 1, newCommand);
-
+            //Adds newSearch to process.argv
             for (i = 0; i < newSearch.length; i++) {
                 liri.nodeArgs.push(newSearch[i]);
             };
